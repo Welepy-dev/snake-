@@ -53,23 +53,50 @@ typedef struct s_texture2d
 	int frame_limit;
 } t_game;*/
 
+typedef struct snake_cell
+{
+	Vector2				dir;
+	Vector2				pos;
+	int					index;
+	struct snake_cell	*next;
+}	t_snake_cell;
+
 typedef struct s_snake 
 {
-  int size;
-} t_snake;
+	int				size;
+	t_snake_cell	head;
+	t_snake_cell	*body;
+}	t_snake;
+
+typedef struct s_collectible
+{
+	Vector2 pos;
+	bool	have;
+}	Collectible;
 
 typedef struct s_map
 {
-  char **matrix;
-  char **pos;
-  int size;
-} t_map;
+	char		**matrix;
+	char		**pos;
+	Rectangle	borders;
+	int			size;
+	Collectible	apple;
+}	t_map;
+
+typedef struct score
+{
+	char	score_text[32];
+	int		score;
+}	Score;
 
 typedef struct s_game
 {
-  t_snake snake;
-  Vector2 window;
-  t_map   map;
-} t_game;
+	t_snake	snake;
+	Vector2	window;
+	t_map   map;
+	int		frame_counter;
+	int		move_delay;
+	Score	score;
+}	t_game;
 
 #endif
